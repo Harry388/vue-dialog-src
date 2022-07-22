@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/Harry388/vue-dialog-src/issues"
   },
-  "homepage": "https://github.com/Harry388/vue-dialog-src#readme"
+  "homepage": "https://github.com/Harry388/vue-dialog-src#readme",
+  "keywords": ["vue", "vue3", "vuejs", "plugin", "dialog"]
 }

@@ -33,7 +33,7 @@ const plugin = {
 
                 Object.keys(localOptions).forEach(key => {
                     const value = localOptions[key];
-                    if (!['message', 'buttons', 'callbacks', 'css'].includes(key) && (value instanceof Function) && (value.length === 0)) merged.callbacks[key] = value;
+                    if (!['message', 'buttons', 'callbacks', 'css', 'wrapperClass', 'boxClass', 'messageClass', 'buttonsClass'].includes(key) && (value instanceof Function) && (value.length === 0)) merged.callbacks[key] = value;
                 })
 
                 return merged;
