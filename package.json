@@ -1,0 +1,19 @@
+{
+  "name": "@harrythompson/vue-dialog",
+  "version": "1.0.0",
+  "description": "A simple dialog box for vue 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harry388/vue-dialog-src.git"
+  },
+  "author": "harrythompson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harry388/vue-dialog-src/issues"
+  },
+  "homepage": "https://github.com/Harry388/vue-dialog-src#readme"
+}
