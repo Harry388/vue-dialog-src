@@ -1,8 +1,8 @@
 {
-  "name": "@harrythompson/vue-dialog",
+  "name": "vue3-dialog",
   "version": "1.0.0",
   "description": "A simple dialog box for vue 3",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
