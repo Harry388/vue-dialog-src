@@ -5,7 +5,7 @@ const dialog = options => {
     const message = document.createElement('div');
     const buttons = document.createElement('div');
 
-    message.innerHTML = options.message;
+    message.appendChild(document.createTextNode(options.message));
 
     Object.keys(options.buttons).forEach(key => {
         const button = document.createElement('button');
@@ -13,7 +13,7 @@ const dialog = options => {
             if (key in options.callbacks) options.callbacks[key]();
             dialogWrapper.parentNode.removeChild(dialogWrapper);
         };
-        button.innerHTML = options.buttons[key]?.text || key.charAt(0).toUpperCase() + key.toLowerCase().slice(1);
+        button.appendChild(document.createTextNode(options.buttons[key]?.text || key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)));
         button.classList.add(...(options.buttons[key]?.class?.split(' ') || ['__dialog-button', '__dialog-button-' + key.toLowerCase()]));
         buttons.appendChild(button);
     });
