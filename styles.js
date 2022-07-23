@@ -2,7 +2,7 @@ const applyStyles = options => {
 
     const style = document.createElement('style');
 
-    style.innerHTML = `
+    style.appendChild(document.createTextNode(`
     ${options.wrapper ? `.__dialog-wrapper {
         position: fixed;
         z-index: 1;
@@ -64,7 +64,7 @@ const applyStyles = options => {
     .__dialog-button:focus-visible {
         outline: 4px auto -webkit-focus-ring-color;
     }` : ''}
-    `;
+    `));
 
     document.head.append(style);
 
