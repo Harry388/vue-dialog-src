@@ -1,6 +1,6 @@
 {
   "name": "vue3-dialog",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple dialog box for vue 3",
   "main": "index.ts",
   "scripts": {
@@ -16,5 +16,11 @@
     "url": "https://github.com/Harry388/vue-dialog-src/issues"
   },
   "homepage": "https://github.com/Harry388/vue-dialog-src#readme",
-  "keywords": ["vue", "vue3", "vuejs", "plugin", "dialog"]
+  "keywords": [
+    "vue",
+    "vue3",
+    "vuejs",
+    "plugin",
+    "dialog"
+  ]
 }
