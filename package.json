@@ -1,6 +1,6 @@
 {
   "name": "vue3-dialog",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple dialog box for vue 3",
   "main": "index.ts",
   "scripts": {
