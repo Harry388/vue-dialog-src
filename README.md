@@ -39,6 +39,36 @@ An object with these attributes can be passed to the plugin on install in your `
 |  buttonsClass    | String              | `__dialog-buttons`   |  Class for div that holds the buttons    |
 |  css             | Object             |  `{ default: true, wrapper: true, darken: 0.6 }`      |  **This option is only read when first installed**<br> css.default determines if default styles should be applied. wrapper.default determines if the wrapper class styles should be applied. css.darken determines what percentage to darken behind the dialog box    |
 
+Options set in `main.js` are saved as a global property that can be editted later
+
+This object can be access by injection:
+```js
+import { inject } from 'vue';
+
+const options = inject('$dialogOptions');
+
+options.presets.delete = {
+    message: 'Delete?',
+    buttons: ['cancel', 'delete']
+}
+```
+Directly in the template:
+```html
+<button @click="$dialogOptions.message = 'Changed!'">Click Me!</button>
+```
+
+Or directly in the script with options API:
+```js
+export default {
+mounted() {
+    this.$dialogOptions.presets.delete = {
+        message: 'Delete?',
+        buttons: ['cancel', 'delete']
+    }
+}
+```
+
+
 ### Buttons
 
 The buttons options can optionally be passed as an object in this format:
@@ -128,7 +158,7 @@ app.use(Dialog, {
 })
 ```
 
-The default 'no' buttons details will automatically be filled in as:
+The default 'no' button's details will automatically be filled in as:
 ```js
 {
     no: {
@@ -143,7 +173,7 @@ The default 'no' buttons details will automatically be filled in as:
 In a component file:
 ```html
 <button v-dialog="{ yes: myYesFunction }">Button One</button>
-<button v-dialog="{ preset: 'remove', cancel: myCancelFunction, remove: myRemoveFunction }">Button Two</button>
+<button v-dialog:remove="{ cancel: myCancelFunction, remove: myRemoveFunction }">Button Two</button>
 ```
 
 ### Directive
@@ -162,6 +192,16 @@ Click Me!
 ```
 
 When this button is clicked a dialog box will appear with the message `Are you sure?` and a yes and no button. The dialog box will disapear after these are pressed
+
+When using the directive the preset name can be passed in as the directive argument
+This:
+```html
+<button v-dialog:confirm>Click Me!</button>
+```
+Is equivalent to:
+```html
+<button v-dialog="{ preset: 'confirm' }">Click Me!</button>
+```
 
 ### Provide / Inject
 

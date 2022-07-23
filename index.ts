@@ -29,8 +29,8 @@ const plugin = {
                 if ('preset' in localOptions) {
                     const p = globalOptions.presets[localOptions.preset];
                     if (p) {
-                        localOptions.message = p.message || localOptions.message || globalOptions.message;
-                        localOptions.buttons = p.buttons || localOptions.buttons || globalOptions.buttons;
+                        localOptions.message = localOptions.message || p.message ||  globalOptions.message;
+                        localOptions.buttons = localOptions.buttons || p.buttons ||  globalOptions.buttons;
                     }
                 }
 
@@ -61,7 +61,13 @@ const plugin = {
         const createDialog = localOptions => dialog(mergeOptions(localOptions));
 
         app.directive('dialog', {
-            mounted: (el, { value }) =>  el.onclick = () => createDialog(value || {}),
+            mounted: (el, { value, arg }) =>  {
+                if (arg) {
+                    if (value) value.preset = arg;
+                    else value = { preset: arg };
+                }
+                el.onclick = () => createDialog(value || {});
+            },
             unmounted: el => el.onclick = null
         });
 
