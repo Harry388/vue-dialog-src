@@ -57,9 +57,20 @@ const applyStyles = options => {
         background-color: #535bf2;
     }
 
+    .__dialog-button-delete {
+        --colour: #f22e1f;
+        background-color: var(--colour);
+        border-color: var(--colour);
+    }
+
     .__dialog-button:hover {
         border-color: #646cff;
     }
+
+    .__dialog-button-delete:hover, .__dialog-button-confirm:hover {
+        border-color: white;
+    }
+
     .__dialog-button:focus,
     .__dialog-button:focus-visible {
         outline: 4px auto -webkit-focus-ring-color;
