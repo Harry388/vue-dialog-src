@@ -12,27 +12,32 @@ npm install vue3-dialog
 
 ```js
 import { createApp } from 'vue';
+import App from './App.vue';
 import Dialog from 'vue3-dialog';
 
-const app = createApp({});
-app.use(Dialog);
-app.mount('#app');
+createApp(App)
+.use(Dialog, {
+    //...options (not required)
+})
+.mount('#app');
 ```
 
 ## Available options
 
-The API methods accepts these options:
+An object with these attributes can be passed to the plugin on install in your `main.js` file or when calling the plugin methods in a component
 
 | Attribute        | Type                | Default              | Description      |
 | :---             | :---:               | :---:                | :---             |
 |  message         | String              | `Hello World!`       |  The message prompted to the user   |
-|  buttons         | String Array        | [`cancel`, `confirm`]|  List of buttons for the user to use as a reply  |
-|  callbacks       | Object              | {}                   |  Set each key as a button name and the value as a function. The function will be run when the corresponding button is clicked  |
+|  buttons         | String Array        | `['cancel', 'confirm']`|  List of buttons for the user to use as a reply  |
+|  presets         | Object              | `{}`                 | Preset dialog boxes with their own buttons and message |
+|  preset          | String              | --                   | The preset to use, defined in the presets option |
+|  callbacks       | Object              | `{}`                  |  Set each key as a button name and the value as a function. The function will be run when the corresponding button is clicked  |
 |  wrapperClass    | String              | `__dialog-wrapper`   |  Class for wrapper div that darkens the screen when the dialog box is shown    |
 |  boxClass        | String              | `__dialog-box`       |  Class for main dialog box div    |
 |  messageClass    | String              | `__dialog-message`   |  Class for message div     |
 |  buttonsClass    | String              | `__dialog-buttons`   |  Class for div that holds the buttons    |
-|  css             | Object             |  { default: true, wrapper: true, darken: 0.6 }      |  This option is onyl read when first installed. css.default determines if default styles should be applied. wrapper.default determines if the wrapper class styles should be applied. css.darken determines what percentage to darken behind the dialog box    |
+|  css             | Object             |  `{ default: true, wrapper: true, darken: 0.6 }`      |  **This option is only read when first installed**<br> css.default determines if default styles should be applied. wrapper.default determines if the wrapper class styles should be applied. css.darken determines what percentage to darken behind the dialog box    |
 
 ### Buttons
 
@@ -40,13 +45,15 @@ The buttons options can optionally be passed as an object in this format:
 
 ```js
 {
-    cancel: {
-        text: 'Cancel',
-        class: '__dialog-button-cancel __dialog-button'
-    },
-    confirm: {
-        text: 'Confirm',
-        class: '__dialog-button-confirm __dialog-button'
+    buttons: {
+        cancel: {
+            text: 'Cancel',
+            class: '__dialog-button-cancel __dialog-button'
+        },
+        confirm: {
+            text: 'Confirm',
+            class: '__dialog-button-confirm __dialog-button'
+        }
     }
 }
 ```
@@ -55,13 +62,18 @@ The class attribute is a class name that will be applied to the button<br>
 The values shown are are the default values when none is provided
 
 
-Passing in the array ['cancel', 'confirm'] will yield the same results as the object above
+This object will create the same results as the object above:
+```js
+{
+    buttons: ['cancel', 'confirm']
+}
+```
 
 
 ### Callbacks
 
-Any options passed in that is not list above will be treated as a callback<br>
-It will be added to the callbacks options if its value is a function with no arguments
+Any options passed in that is not listed above will be treated as a callback<br>
+It will be added to the callbacks option if its value is a function with no arguments
 
 For example,
 ```js
@@ -75,7 +87,7 @@ For example,
 }
 ```
 
-is the same as :
+Is the same as :
 ```js
 {
     buttons: ['delete', 'cancel'],
@@ -87,21 +99,28 @@ is the same as :
 
 ## Usage
 
-It is recommended to set default options in your main.js and only pass in messages, callbacks or button names when passing in options else where
+In your main.js you should set the default or fallback options for the dialog box along with your presets<br>
+In your components you then only need to specify the preset name along with the callback functions
 
-These options could be used when the dialog box is mainly for deleting some contents:
+For example:
 
 main.js:
 ```js
 app.use(Dialog, {
-    message: 'Do you want to delete?',
+    message: 'Are you sure?',
     buttons: {
-        remove: {
-            text: 'Yes I want to delete',
-            class: 'my-delete-button-class'
+        yes: {
+            text: 'Yes',
+            class: 'my-yes-button-class'
         },
-        cancel: {}
+        no: {}
     },
+    presets: {
+        remove: {
+            message: 'Do you want to delete this?',
+            buttons: ['cancel', 'remove']
+        }
+    }
     boxClass: 'my-box-class',
     css: {
         darken: 0.9
@@ -109,11 +128,22 @@ app.use(Dialog, {
 })
 ```
 
-Details for the empty cancel object will be automatically filled in
+The default 'no' buttons details will automatically be filled in as:
+```js
+{
+    no: {
+        text: 'no',
+        class: '__dialog-button-no __dialog-button'
+    }
+}
+```
 
-mycomponent.vue:
+'cancel' and 'remove' buttons are filled in similarly
+
+In a component file:
 ```html
-<button v-dialog="{ remove: myDeleteFunction, cancel: myCancelFunction }">DELETE</button>
+<button v-dialog="{ yes: myYesFunction }">Button One</button>
+<button v-dialog="{ preset: 'remove', cancel: myCancelFunction, remove: myRemoveFunction }">Button Two</button>
 ```
 
 ### Directive
@@ -132,7 +162,6 @@ Click Me!
 ```
 
 When this button is clicked a dialog box will appear with the message `Are you sure?` and a yes and no button. The dialog box will disapear after these are pressed
-
 
 ### Provide / Inject
 
