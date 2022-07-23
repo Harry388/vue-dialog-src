@@ -57,13 +57,14 @@ Directly in the template:
 <button @click="$dialogOptions.message = 'Changed!'">Click Me!</button>
 ```
 
-Or directly in the script with options API:
+Or directly in the script with the options API:
 ```js
 export default {
-mounted() {
-    this.$dialogOptions.presets.delete = {
-        message: 'Delete?',
-        buttons: ['cancel', 'delete']
+    mounted() {
+        this.$dialogOptions.presets.delete = {
+            message: 'Delete?',
+            buttons: ['cancel', 'delete']
+        }
     }
 }
 ```
@@ -193,7 +194,7 @@ Click Me!
 
 When this button is clicked a dialog box will appear with the message `Are you sure?` and a yes and no button. The dialog box will disapear after these are pressed
 
-When using the directive the preset name can be passed in as the directive argument
+When using the directive the preset name can be passed in as the directive argument<br>
 This:
 ```html
 <button v-dialog:confirm>Click Me!</button>
