@@ -151,7 +151,7 @@ app.use(Dialog, {
             message: 'Do you want to delete this?',
             buttons: ['cancel', 'remove']
         }
-    }
+    },
     boxClass: 'my-box-class',
     css: {
         darken: 0.9
