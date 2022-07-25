@@ -29,8 +29,7 @@ const plugin = {
                 if ('preset' in localOptions) {
                     const p = globalOptions.presets[localOptions.preset];
                     if (p) {
-                        localOptions.message = localOptions.message || p.message ||  globalOptions.message;
-                        localOptions.buttons = localOptions.buttons || p.buttons ||  globalOptions.buttons;
+                        for (const key in p) localOptions[key] = localOptions[key] || p[key];
                     }
                 }
 
@@ -44,7 +43,7 @@ const plugin = {
 
                 Object.keys(localOptions).forEach(key => {
                     const value = localOptions[key];
-                    if (!['message', 'buttons', 'presets', 'callbacks', 'css', 'wrapperClass', 'boxClass', 'messageClass', 'buttonsClass'].includes(key) && (value instanceof Function) && (value.length === 0)) merged.callbacks[key] = value;
+                    if (!['message', 'buttons', 'presets', 'callbacks', 'css', 'wrapperClass', 'boxClass', 'messageClass', 'buttonsClass', 'preset'].includes(key) && (value instanceof Function) && (value.length === 0)) merged.callbacks[key] = value;
                 })
 
                 return merged;
