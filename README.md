@@ -1,6 +1,6 @@
 # Vue 3 Dialog Box
 
-A simple customisable dialog box plugin for vue 3
+A simple and customisable dialog box plugin for vue 3
 
 ## Installation
 
@@ -41,7 +41,7 @@ An object with these attributes can be passed to the plugin on install in your `
 
 Options set in `main.js` are saved as a global property that can be editted later
 
-This object can be access by injection:
+This object can be accessed by injection:
 ```js
 import { inject } from 'vue';
 
@@ -163,7 +163,7 @@ The default 'no' button's details will automatically be filled in as:
 ```js
 {
     no: {
-        text: 'no',
+        text: 'No',
         class: '__dialog-button-no __dialog-button'
     }
 }
@@ -214,7 +214,7 @@ import { inject } from 'vue';
 const dialog = inject('$dialog');
 
 dialog({
-    message: 'Are you sure?'
+    message: 'Are you sure?',
     buttons: ['yes', 'no'],
     yes: () => {/*some function*/},
     no: () => {/*some function*/}
@@ -227,7 +227,7 @@ The $dialog method is available in the template to activate a dialog box
 
 ```html
 <button @click="$dialog({
-    message: 'Are you sure?'
+    message: 'Are you sure?',
     buttons: ['yes', 'no'],
     yes: () => {/*some function*/},
     no: () => {/*some function*/}
@@ -243,7 +243,7 @@ export default {
     methods: {
         activateDialog() {
             this.$dialog({
-                message: 'Are you sure?'
+                message: 'Are you sure?',
                 buttons: ['yes', 'no'],
                 yes: () => {/*some function*/},
                 no: () => {/*some function*/}

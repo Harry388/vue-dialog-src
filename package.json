@@ -21,6 +21,8 @@
     "vue3",
     "vuejs",
     "plugin",
-    "dialog"
+    "dialog",
+    "dialogue",
+    "modal"
   ]
 }
