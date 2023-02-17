@@ -29,6 +29,8 @@ const dialog = options => {
 
     document.body.appendChild(dialogWrapper);
 
+    document.activeElement.blur();
+
 };
 
 export default dialog;
